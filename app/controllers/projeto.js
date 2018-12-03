@@ -9,7 +9,7 @@ var projetoController = {
 
 module.exports = function(app) {
   projetoController.getProjetos = function(req, res) {
-    var ProjetoModel = app.model.projeto;
+    var ProjetoModel = app.models.projeto;
     ProjetoModel.findAll({})
     .then((projetos) => {
       res.status(200).json(projetos);
