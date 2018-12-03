@@ -19,15 +19,30 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
         validate: { isInt: true }
     },
 
-	RequerimentosRegiao: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	RequerimentosRegiao: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	RequerimentosRegiaoC: { type: db.Sequelize.TEXT, allowNull: true },
-	RequerimentosIndustria: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	RequerimentosIndustria: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	RequerimentosIndustriaC: { type: db.Sequelize.TEXT, allowNull: true },
-	RequerimentosTecnologia: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	RequerimentosTecnologia: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	RequerimentosTecnologiaC: { type: db.Sequelize.TEXT, allowNull: true },
-	PadroesTecnicos: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	PadroesTecnicos: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	PadroesTecnicosC: { type: db.Sequelize.TEXT, allowNull: true },
-	PadroesFuncionais: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	PadroesFuncionais: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	PadroesFuncionaisC: { type: db.Sequelize.TEXT, allowNull: true }
 }, {
     timestamps: false,

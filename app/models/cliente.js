@@ -17,78 +17,78 @@ const Cliente = db.conexao.define("Cliente",
   RazaoSocial: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [10, 100] }
+    validate: { len: { args: [10, 100], msg: "Deve ter entre 10 e 100 caracteres." } }
   },
 
   NomeFantasia: {
     type: db.Sequelize.STRING,
     allowNull: false,
     defaultValue: "",
-    validate: { len: [0, 100] }
+    validate: { len: { args: [0, 100], msg: "Máximo de 100 caracteres." } }
   },
 
   Cnpj: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [14, 18] }
+    validate: { len: { args: [14, 18], msg: "Mínimo de 14 máximo de 18 caracteres." } }
   },
 
   AreaAtuacao: {
     type: db.Sequelize.STRING,
     allowNull: false,
     defaultValue: "",
-    validate: { len: [0, 30] }
+    validate: { len: { args: [0, 30], msg: "Máximo de 30 caracteres." } }
   },
 
   Site: {
     type: db.Sequelize.STRING,
     allowNull: false,
     defaultValue: "",
-    validate: { len: [0, 30] }
+    validate: { len: { args: [0, 30], msg: "Máximo de 30 caracteres." } }
   },
 
   NomeContato: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 100] }
+    validate: { len: { args: [0, 100], msg: "Máximo de 100 caracteres." } }
   },
 
   Cargo: {
     type: db.Sequelize.STRING,
     allowNull: false,
     defaultValue: "",
-    validate: { len: [0, 30] }
+    validate: { len: { args: [0, 30], msg: "Cargo, máximo de 30 caracteres." } }
   },
 
   TelefoneComercial: {
     type: db.Sequelize.STRING,
     allowNull: false,
     defaultValue: "",
-    validate: { len: [0, 14] }
+    validate: { len: { args: [0, 14], msg: "Telefone celular, máximo de 15 caracteres." } }
   },
 
   TelefoneCelular: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 15] }
+    validate: { len: {args: [0, 15], msg: "Telefone celular, máximo de 15 caracteres." } }
   },
 
   Email: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 30] }
+    validate: { len: { args: [0, 30], msg: "Email, máximo de 30 caracteres." } }
   },
 
   CEP: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 9] }
+    validate: { len: { args: [0, 9], msg: "CEP máximo de 9 caracteres." } }
   },
 
   Logradouro: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 100] }
+    validate: { len: { args: [0, 100], msg: "Logradouro máximo de 100 caracteres." } }
   },
 
   Numero: {
@@ -101,19 +101,19 @@ const Cliente = db.conexao.define("Cliente",
     type: db.Sequelize.STRING,
     allowNull: true,
     defaultValue: "",
-    validate: { len: [0, 30] }
+    validate: { len: { args: [0, 30], msg: "Complemento tem máximo de 30 caractes." } }
   },
 
   Estado: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 2] }
+    validate: { len: { args: [0, 2], msg: "Sigla de estado tem máximo de 2 caracteres." } }
   },
 
   Cidade: {
     type: db.Sequelize.STRING,
     allowNull: false,
-    validate: { len: [0, 30] }
+    validate: { len: { args: [0, 30], msg: "Cidade deve conter até 30 caracteres." } }
   },
 
   Senha: {
@@ -125,7 +125,7 @@ const Cliente = db.conexao.define("Cliente",
       this.setDataValue('Senha', hmac.digest('hex'));
     },
     validate: {
-      len: [8, 70]
+      len: { args: [8, 70], msg: "Senha deve conter entre 8 e 70 caracteres" }
     }
   },
 
@@ -134,7 +134,7 @@ const Cliente = db.conexao.define("Cliente",
     allowNull: false,
     defaultValue: 1,
     validate: {
-      isIn: [[0, 1]], isInt: true
+      isIn: { args: [[0, 1]], msg: "Status deve ser 0 ou 1" }, isInt: true
     }
   }
 },

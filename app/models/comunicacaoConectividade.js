@@ -19,18 +19,36 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
         validate: { isInt: true }
     },
 
-	LocalTecnologia: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	LocalTecnologia: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	LocalTecnologiaC: { type: db.Sequelize.TEXT, allowNull: true },
-	LocalLarguraBanda: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	LocalLarguraBanda: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	LocalLarguraBandaC: { type: db.Sequelize.TEXT, allowNull: true },
-	LocalMaximaLatencia: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	LocalMaximaLatencia: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	LocalMaximaLatenciaC: { type: db.Sequelize.TEXT, allowNull: true },
 
-	RemotaTecnologia: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	RemotaTecnologia: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	RemotaTecnologiaC: { type: db.Sequelize.TEXT, allowNull: true },
-	RemotaLarguraBanda: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	RemotaLarguraBanda: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	RemotaLarguraBandaC: { type: db.Sequelize.TEXT, allowNull: true },
-	RemotaMaximaLatencia: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	RemotaMaximaLatencia: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	RemotaMaximaLatenciaC: { type: db.Sequelize.TEXT, allowNull: true }
 }, {
     timestamps: false,

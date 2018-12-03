@@ -12,7 +12,7 @@ const Projeto = db.conexao.define("Projeto", {
     Nome: {
         type: db.Sequelize.STRING,
         allowNull: false,
-        validate: { len: [4, 60] }
+        validate: { len: { args: [4, 60], msg: "Nome, mínimo de 4, máximo de 60 caracteres." } }
     },
     IdCliente: {
         type: db.Sequelize.INTEGER,

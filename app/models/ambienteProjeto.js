@@ -19,13 +19,28 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
         }
     },
 
-	AmbienteTempo: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	AmbienteTempo: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	AmbienteTempoC: { type: db.Sequelize.TEXT, allowNull: true },
-	AmbienteBudget: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+    
+    AmbienteBudget: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	AmbienteBudgetC: { type: db.Sequelize.TEXT, allowNull: true },
-	AmbienteFuncionais: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+    
+    AmbienteFuncionais: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	AmbienteFuncionaisC: { type: db.Sequelize.TEXT, allowNull: true },
-	AmbienteTecnicas: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+    
+    AmbienteTecnicas: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	AmbienteTecnicasC: { type: db.Sequelize.TEXT, allowNull: true }
 } , {
     timestamps: false,

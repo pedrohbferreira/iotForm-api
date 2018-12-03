@@ -19,19 +19,40 @@ const ServicosBackend = db.conexao.define("ServicosBackend", {
         validate: { isInt: true }
     },
 
-	GeralEstrategiaAplicacao: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GeralEstrategiaAplicacao: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GeralEstrategiaAplicacaoC: { type: db.Sequelize.TEXT, allowNull: true },
-	GeralComplexidadeNegocio: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GeralComplexidadeNegocio: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GeralComplexidadeNegocioC: { type: db.Sequelize.TEXT, allowNull: true },
-	GeralIntegracaoBackend: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GeralIntegracaoBackend: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GeralIntegracaoBackendC: { type: db.Sequelize.TEXT, allowNull: true },
-	GestaoVolumeDados: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GestaoVolumeDados: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GestaoVolumeDadosC: { type: db.Sequelize.TEXT, allowNull: true },
-	GestaoVariedadeDados: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GestaoVariedadeDados: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GestaoVariedadeDadosC: { type: db.Sequelize.TEXT, allowNull: true },
-	GestaoVariabilidadeDados: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GestaoVariabilidadeDados: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GestaoVariabilidadeDadosC: { type: db.Sequelize.TEXT, allowNull: true },
-	GestaoAnalytics: { type: db.Sequelize.TINYINT, allowNull: false, validate: { isInt: true, isIn: [[1, 2, 3, 4]] } },
+	GestaoAnalytics: { 
+        type: db.Sequelize.TINYINT, allowNull: false, 
+        validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } }
+    },
 	GestaoAnalyticsC: { type: db.Sequelize.TEXT, allowNull: true }
 }, {
     timestamps: false,
