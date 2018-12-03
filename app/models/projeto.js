@@ -1,4 +1,4 @@
-const db = require("../../confg/db");
+const db = require("../../config/db");
 
 const Projeto = db.conexao.define("Projeto", {
     Id: {

@@ -9,4 +9,7 @@ module.exports = function(app) {
     .get(ClienteController.getClienteId)
     .put(ClienteController.putCliente)
     .delete(ClienteController.deleteCliente);
+
+    app.route('/cliente/:id([0-9]{1,4})/projetos')
+    .get(ClienteController.getProjetos);
 };

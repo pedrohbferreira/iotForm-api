@@ -1,4 +1,4 @@
-const db = require("../../confg/db");
+const db = require("../../config/db");
 const crypt = require("crypto");
 
 const Cliente = db.conexao.define("Cliente", 

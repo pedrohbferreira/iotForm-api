@@ -1,14 +1,15 @@
-const Cliente = require("../app/models/cliente")();
-const Projeto = require("../app/models/projeto")();
-const AmbienteProjeto = require("../app/models/ambienteProjeto")();
-const AtivosDevices = require("../app/models/ativosDevices")();
-const ComunicacaoConectividade = require("../app/models/comunicaoConectividade")();
-const PadroesRequerimentos = require("../app/models/padroesRequerimentos")();
-const QuestionarioRespostas = require("../app/models/questionarioRespostas")();
-const ServicosBackend = require("../app/models/servicosBackend")();
 
-module.exports = function() {
-    Cliente.hasMany(Projeto, { foreignKey: "IdCliente", sourceKey: "Id" });
+module.exports = function(app) {
+    const Cliente = app.models.cliente;
+    const Projeto = app.models.projeto;
+    const AmbienteProjeto = app.models.ambienteProjeto;
+    const AtivosDevices = app.models.ativosDevices;
+    const ComunicacaoConectividade = app.models.comunicacaoConectividade;
+    const PadroesRequerimentos = app.models.padroesRequerimentos;
+    const QuestionarioRespostas = app.models.questionarioRespostas;
+    const ServicosBackend = app.models.servicosBackend;
+    
+    Cliente.hasMany(Projeto, { foreignKey: "IdCliente", sourceKey: "Id", as: "Projetos" });
     Projeto.belongsTo(Cliente, { foreignKey: "IdCliente", targetKey: "Id"});
     
     Projeto.hasMany(AmbienteProjeto, { foreignKey: "IdProjeto", sourceKey: "Id" });

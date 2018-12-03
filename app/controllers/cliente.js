@@ -85,5 +85,29 @@ module.exports = function (app) {
 		.catch((erro) => res.status(400).json(erro));
 	};
 
+	clienteController.getProjetos = function(req, res) {
+		var ClienteModel = app.models.cliente;
+		var ProjetosModel = app.models.projeto;
+		var idClienteRequest = parseInt(req.params.id);
+		const Sequelize = require('sequelize');
+
+		ClienteModel.findOne({
+			where: { Id: idClienteRequest },
+			attributes: { exclude: ['Senha'] },
+			include: [
+				{ model: ProjetosModel, as: "Projetos" }
+			]
+		})
+		.then((cliente) => {
+			if(cliente) {
+				res.status(200).json(cliente);
+			}
+			else {
+				res.status(204).end();
+			}
+		})
+		.catch((error) => res.status(400).json(error));
+	};
+
 	return clienteController;
 };

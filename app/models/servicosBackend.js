@@ -1,4 +1,4 @@
-const db = require('../../confg/db');
+const db = require('../../config/db');
 
 const ServicosBackend = db.conexao.define("ServicosBackend", {
     Id: {
