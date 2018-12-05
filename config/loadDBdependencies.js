@@ -12,12 +12,12 @@ module.exports = function(app) {
     Cliente.hasMany(Projeto, { foreignKey: "IdCliente", sourceKey: "Id", as: "Projetos" });
     Projeto.belongsTo(Cliente, { foreignKey: "IdCliente", targetKey: "Id"});
     
-    Projeto.hasMany(AmbienteProjeto, { foreignKey: "IdProjeto", sourceKey: "Id" });
-    Projeto.hasMany(AtivosDevices, { foreignKey: "IdProjeto", sourceKey: "Id" });
-    Projeto.hasMany(ComunicacaoConectividade, { foreignKey: "IdProjeto", sourceKey: "Id" });
-    Projeto.hasMany(PadroesRequerimentos, { foreignKey: "IdProjeto", sourceKey: "Id" });
-    Projeto.hasMany(QuestionarioRespostas, { foreignKey: "IdProjeto", sourceKey: "Id" });
-    Projeto.hasMany(ServicosBackend, { foreignKey: "IdProjeto", sourceKey: "Id" });
+    Projeto.hasMany(AmbienteProjeto, { foreignKey: "IdProjeto", sourceKey: "Id", as: "Ambientes" });
+    Projeto.hasMany(AtivosDevices, { foreignKey: "IdProjeto", sourceKey: "Id", as: "AtivosDevices" });
+    Projeto.hasMany(ComunicacaoConectividade, { foreignKey: "IdProjeto", sourceKey: "Id", as: "ComConectividades" });
+    Projeto.hasMany(PadroesRequerimentos, { foreignKey: "IdProjeto", sourceKey: "Id", as: "PadroesRequerimentos" });
+    Projeto.hasMany(QuestionarioRespostas, { foreignKey: "IdProjeto", sourceKey: "Id", as: "Questionarios" });
+    Projeto.hasMany(ServicosBackend, { foreignKey: "IdProjeto", sourceKey: "Id", as: "ServicosBackend" });
 
     AmbienteProjeto.belongsTo(Projeto, { foreignKey: "IdProjeto", targetKey: "Id" });
     AtivosDevices.belongsTo(Projeto, { foreignKey: "IdProjeto", targetKey: "Id" });
