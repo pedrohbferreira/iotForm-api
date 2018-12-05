@@ -5,9 +5,11 @@ module.exports = function(app) {
     .get(ativosDevicesController.getAtivos)
     .post(ativosDevicesController.postAtivos);
 
-    app.route('/ativos/:id([0-9]{1,4})')
+    app.route('/ativosDevices/:id([0-9]{1,4})')
     .get(ativosDevicesController.getAtivosId)
     .put(ativosDevicesController.putAtivos)
     .delete(ativosDevicesController.deleteAtivos);
 
+    app.route('/ativosDevices/projeto/:id([0-9]{1,4})')
+    .get(ativosDevicesController.getAtivosIdProjeto);
 }

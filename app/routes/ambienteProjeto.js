@@ -10,6 +10,6 @@ module.exports = function(app) {
   .put(ambienteController.putAmbiente)
   .delete(ambienteController.deleteAmbiente);
 
-  app.route('/ambienteProjeto/projeto/:id')
+  app.route('/ambienteProjeto/projeto/:id([0-9]{1,4})')
   .get(ambienteController.getAmbienteIdProjeto);
 };
