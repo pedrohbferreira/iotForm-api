@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var padroesController = app.controller.padroesRequerimentos;
+  var padroesController = app.controllers.padroesRequerimentos;
 
   app.route('/padroes')
   .get(padroesController.getPadroes)
