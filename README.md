@@ -1,11 +1,12 @@
 # iotForm-api
-Api em Node.js para complementar o projeto de faculdade, outra parte do projeto em: https://github.com/SherwoodArcher/IOTForm
+Api em Node.js para complementar o projeto de faculdade, outra parte do projeto em: https://github.com/SherwoodArcher/IOTForm  
+Link: https://iotform-api.azurewebsites.net/
  
 ## Rotas 
  
 ### 1 Cliente  
 **rota:** GET /cliente  
-*retorno:* 200 OK Cliente[] | 200 OK []  
+*retorno:* 200 OK Cliente[ ] | 200 OK [ ]  
   
 **rota:** GET /cliente/:id  
 *retorno:* 200 OK Cliente | 204 No Content  
@@ -30,7 +31,7 @@ realiza busca por Email e Cnpj, cria ou retorna existente
 }
 ```  
 **rota:** PUT /cliente/:id  
-*retorno:* 200 OK [] | 404 Not Found {}  
+*retorno:* 200 OK [ ] | 404 Not Found {}  
 atualiza o cliente com base no id, basta apenas informar os campos  
 retorna o número de registros alterados
 *requisição:*  
@@ -54,13 +55,13 @@ retorna o número de registros alterados
  }
  ```  
 **rota:** DELETE /cliente/:id  
-*retorna:* 200 OK [] | 400 Bad Request {}  
+*retorna:* 200 OK [ ] | 400 Bad Request {}  
 atuliza o statudo Cliente para 0, retornando o número de registros alterados  
   
   
 ### 2 Projeto  
 **rota:** GET /projeto  
-*retorna:* 200 ok Proejto[] | 200 OK []  
+*retorna:* 200 ok Proejto[ ] | 200 OK [ ]  
   
 **rota:** POST / projeto  
 *retorna:* 201 Created Projeto  
@@ -76,7 +77,7 @@ atuliza o statudo Cliente para 0, retornando o número de registros alterados
 *retrona:* 200 OK Projeto | 204 No Content  
   
 **rota:** GET /projeto/cliente/:idCliente  
-*retorna:* 200 OK Projeto[] | 200 OK []  
+*retorna:* 200 OK Projeto[ ] | 200 OK [ ]  
 busca todos os projetos de um determinado cliente  
   
 **rota:** PUT /projeto/:id  
@@ -91,4 +92,69 @@ retorna o número de linhas alteradas
   
 **rota:** DELETE /projeto/:id  
 *retorna:* 200 OK int  
-retorna número de linhas alteradas
+retorna número de linhas alteradas  
+  
+**rota:** GET /projeto/:id/questionario  
+*retorna:* 200 OK Projeto | 204 Not Content  
+retorna objeto Projeto com todos os seus Questionarios  
+```
+{ "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "Questionarios": [] }
+```  
+  
+**rota:** GET /projeto/:id/abProjeto  
+*retorna:* 200 OK Projeto | 204 Not Content  
+```
+{ "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "AmbienteProjetos": [] }
+```  
+  
+**rota:** GET /projeto/:id/atDevices  
+*retorna:* 200 OK Projeto | 204 Not Content  
+```
+{ "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "AtivosDevices": [] }
+```  
+  
+**rota:** GET /projeto/:id/comConect  
+*retorna:* 200 OK Projeto | 204 Not Content  
+```
+{ "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "ComConectividades": [] }
+```  
+  
+**rota:** GET /projeto/:id/padroesReq  
+*retorna:* 200 OK Projeto | 204 Not Content  
+```
+{ "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "PadroesRequerimentos": [] }
+``` 
+     
+**rota:** GET /projeto/:id/servicosBackend  
+*retorna:* 200 OK Projeto | 204 Not Content  
+```
+{ "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "ServicosBackend": [] }
+```  
+     
+**rota:** GET /projeto/:id/full  
+*retorna:* 200 OK Projeto | 204 Not Content  
+```
+{ 
+	"Id": 0, "Nome": "nome projeto", "IdCliente": 0,
+	"Questionarios": [],
+	"AmbienteProjetos": [],
+	"AtivosDevices": [],
+	"ComConectividades": [],
+	"PadroesRequerimentos": [], 
+	"ServicosBackend": [] 
+}
+```  
+  
+**rota:** GET /projeto/full  
+*retorna:* 200 OK Projeto[ ] | 200 OK [ ]  
+```
+[{ 
+	"Id": 0, "Nome": "nome projeto", "IdCliente": 0,
+	"Questionarios": [],
+	"AmbienteProjetos": [],
+	"AtivosDevices": [],
+	"ComConectividades": [],
+	"PadroesRequerimentos": [], 
+	"ServicosBackend": [] 
+}]
+```  
