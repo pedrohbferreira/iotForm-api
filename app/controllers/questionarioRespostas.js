@@ -50,10 +50,10 @@ module.exports = function (app) {
 
 		QuestionariosModel.update(req.body, {
 			where: { Id: parseInt(req.params.id) },
-			fields: Object.keys(req.bady)
+			fields: Object.keys(req.body)
 		})
 		.then((results) => res.status(200).json(results[0]))
-		.catch((error) => res.status(400).json(erorr));
+		.catch((error) => res.status(400).json(error));
 	};
 
 	questionarioRespostas.deleteQuestionario = function (req, res) { 
