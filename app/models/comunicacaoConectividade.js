@@ -92,7 +92,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 				var remota = (this.RemotaTecnologia + this.RemotaLarguraBanda + this.RemotaMaximaLatencia) / 3;
 				var total = (local + remota) / 2;
 				return {
-					lcoal: parseFloat(new Number(local).toFixed(2)),
+					local: parseFloat(new Number(local).toFixed(2)),
 					remota: parseFloat(new Number(remota).toFixed(2))
 				};
 			}

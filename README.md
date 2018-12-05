@@ -55,7 +55,7 @@ retorna o número de registros alterados
  }
  ```  
 **rota:** DELETE /cliente/:id  
-*retorna:* 200 OK [ ] | 400 Bad Request {}  
+*retorna:* 200 OK int  
 atuliza o statudo Cliente para 0, retornando o número de registros alterados  
   
   
@@ -95,44 +95,44 @@ retorna o número de linhas alteradas
 retorna número de linhas alteradas  
   
 **rota:** GET /projeto/:id/questionario  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 retorna objeto Projeto com todos os seus Questionarios  
 ```
 { "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "Questionarios": [] }
 ```  
   
 **rota:** GET /projeto/:id/abProjeto  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 ```
 { "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "AmbienteProjetos": [] }
 ```  
   
 **rota:** GET /projeto/:id/atDevices  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 ```
 { "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "AtivosDevices": [] }
 ```  
   
 **rota:** GET /projeto/:id/comConect  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 ```
 { "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "ComConectividades": [] }
 ```  
   
 **rota:** GET /projeto/:id/padroesReq  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 ```
 { "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "PadroesRequerimentos": [] }
 ``` 
      
 **rota:** GET /projeto/:id/servicosBackend  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 ```
 { "Id": 0, "Nome": "nome projeto", "IdCliente": 0, "ServicosBackend": [] }
 ```  
      
 **rota:** GET /projeto/:id/full  
-*retorna:* 200 OK Projeto | 204 Not Content  
+*retorna:* 200 OK Projeto | 204 No Content  
 ```
 { 
 	"Id": 0, "Nome": "nome projeto", "IdCliente": 0,
@@ -158,3 +158,155 @@ retorna objeto Projeto com todos os seus Questionarios
 	"ServicosBackend": [] 
 }]
 ```  
+    
+
+### 3 Questionario  
+**rota:** GET /questionario  
+*retorna:* 200 OK Questionario[ ] | 200 OK [ ]  
+  
+**rota:** GET /questionario/:id  
+*retorna:* 200 OK Questionario | 204 No Content  
+  
+**rota:** POST /questionario  
+*retorna:* 201 OK Created  
+  
+**rota:** PUT /questionario/:id  
+*retorna:* 200 OK int
+retorna o número d elinhas alteradas  
+  
+**rota:** DELETE /questionario/:id  
+*retorna:* 200 OK int  
+retorna o número d elinhas alteradas  
+
+  
+
+### 4 AmbienteProjetos  
+**rota:** GET /ambienteProjeto  
+*retorna:* 200 OK AmbienteProjeto[ ] | 200 OK [ ]  
+  
+**rota:** GET /ambienteProjeto/:id  
+*retorna:* 200 OK AmbienteProjeto | 204 No Content  
+  
+**rota:** GET /ambienteProjeto/projeto/:id  
+*retorna:* 200 OK AmbienteProjeto | 200 OK  
+busca todos pertencentes a um projeto  
+  
+**rota:** POST /ambienteProjeto  
+*retorna:* 201 Created AmbienteProjeto  
+*requisição:*  
+```
+{
+	"IdProjeto": 0, 
+	"AmbienteTempo": <int: 1, 2, 3, 4>, "AmbienteTempoC": "comentario",
+	"AmbienteBudget": <int: 1, 2, 3, 4>, "AmbienteBudgetC": "comentario",
+	"AmbienteFuncionais": <int: 1, 2, 3, 4>, "AmbienteFuncionaisC": "comentario",
+	"AmbienteTecnicas": <int: 1, 2, 3, 4>, "AmbienteTecnicasC": "comentario",
+}
+```  
+  
+**rota:** PUT /ambienteProjeto/:id  
+*retorna:* 201 Created AmbienteProjeto  
+*requisição:*  
+```
+{
+	"IdProjeto": 0, 
+	"AmbienteTempo": <int: 1, 2, 3, 4>, "AmbienteTempoC": "comentario",
+	...
+}
+```
+  
+**rota:** DELETE /ambienteProjeto/:id  
+*retorna:* 200 Created AmbienteProjeto  
+retorna o número de linhas alteradas  
+  
+
+
+### 5 AtivosDevices  
+**rota:** GET /ativosDevices  
+*retorna:* 200 OK AmbienteProjeto[ ] | 200 OK [ ]  
+  
+**rota:** GET /ativosDevices/:id  
+*retorna:* 200 OK AmbienteProjeto | 204 No Content  
+  
+**rota:** GET /ativosDevices/projeto:id  
+*retorna:* 200 OK AmbienteProjeto[] | 200 OK  
+busca todos pertencente a um projeto  
+  
+**rota:** POST /ambienteProjeto  
+*retorna:* 201 Created AmbienteProjeto  
+*requisição:*  
+```
+{
+	"IdProjeto": 0, 
+	"GeralNumeroAtivos": <int: 1, 2, 3, 4>, "GeralNumeroAtivosC": "comentario",
+	"GeralValorAtivo": <int: 1, 2, 3, 4>, "GeralValorAtivoC": "comentario",
+	"GeralValorEconomico": <int: 1, 2, 3, 4>, "GeralValorEconomicoC": "comentario",
+	...
+}
+```  
+  
+**rota:** PUT /ativosDevices/:id  
+*retorna:* 201 Created AmbienteProjeto  
+*requisição:*  
+```
+{
+	"IdProjeto": 0, 
+	"GeralNumeroAtivos": <int: 1, 2, 3, 4>, "GeralNumeroAtivosC": "comentario",
+	...
+}
+```
+  
+**rota:** DELETE /ativosDevices/:id  
+*retorna:* 200 Created AmbienteProjeto  
+retorna o número de linhas alteradas  
+   
+  
+
+### 6 ComunicacaoConectividade  
+**rota:** GET /comConect  
+*retorna:* 200 OK ComunicacaoConectividade[ ] | 200 OK [ ]  
+  
+**rota:** GET /comConect/:id  
+*retorna:* 200 OK ComunicacaoConectividade | 204 No Content  
+  
+**rota:** GET /comConect/projeto/:id  
+*retorna:* 200 OK ComunicacaoConectividade | 204 No Content  
+busca todos vinculados a um projeto  
+
+**rota:** POST /comConect  
+*retorna:* 201 OK Created  
+  
+**rota:** PUT /comConect/:id  
+*retorna:* 200 OK int
+retorna o número d elinhas alteradas  
+  
+**rota:** DELETE /comConect/:id  
+*retorna:* 200 OK int  
+retorna o número d elinhas alteradas  
+
+  
+  
+### 7   PadroesRequerimentos
+**rota:** GET /padroes  
+*retorna:* 200 OK PadroesRequerimentos[ ] | 200 OK [ ]  
+  
+**rota:** GET /padroes/:id  
+*retorna:* 200 OK PadroesRequerimentos | 204 No Content  
+  
+**rota:** GET /padroes/projeto/:id  
+*retorna:* 200 OK PadroesRequerimentos | 204 No Content  
+busca todos vinculados a um projeto  
+
+**rota:** POST /padroes  
+*retorna:* 201 OK Created  
+  
+**rota:** PUT /padroes/:id  
+*retorna:* 200 OK int
+retorna o número d elinhas alteradas  
+  
+**rota:** DELETE /padroes/:id  
+*retorna:* 200 OK int  
+retorna o número d elinhas alteradas  
+
+  
+  
