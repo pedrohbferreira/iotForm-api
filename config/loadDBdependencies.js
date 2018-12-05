@@ -9,15 +9,15 @@ module.exports = function(app) {
     const QuestionarioRespostas = app.models.questionarioRespostas;
     const ServicosBackend = app.models.servicosBackend;
     
-    Cliente.hasMany(Projeto, { foreignKey: "IdCliente", sourceKey: "Id", as: "Projetos" });
+    Cliente.hasMany(Projeto, { foreignKey: "IdCliente", sourceKey: "Id" });
     Projeto.belongsTo(Cliente, { foreignKey: "IdCliente", targetKey: "Id"});
     
-    Projeto.hasMany(AmbienteProjeto, { foreignKey: "IdProjeto", sourceKey: "Id", as: "Ambientes" });
-    Projeto.hasMany(AtivosDevices, { foreignKey: "IdProjeto", sourceKey: "Id", as: "AtivosDevices" });
-    Projeto.hasMany(ComunicacaoConectividade, { foreignKey: "IdProjeto", sourceKey: "Id", as: "ComConectividades" });
-    Projeto.hasMany(PadroesRequerimentos, { foreignKey: "IdProjeto", sourceKey: "Id", as: "PadroesRequerimentos" });
-    Projeto.hasMany(QuestionarioRespostas, { foreignKey: "IdProjeto", sourceKey: "Id", as: "Questionarios" });
-    Projeto.hasMany(ServicosBackend, { foreignKey: "IdProjeto", sourceKey: "Id", as: "ServicosBackend" });
+    Projeto.hasOne(AmbienteProjeto, { foreignKey: "IdProjeto" });
+    Projeto.hasOne(AtivosDevices, { foreignKey: "IdProjeto" });
+    Projeto.hasOne(ComunicacaoConectividade, { foreignKey: "IdProjeto" });
+    Projeto.hasOne(PadroesRequerimentos, { foreignKey: "IdProjeto" });
+    Projeto.hasOne(QuestionarioRespostas, { foreignKey: "IdProjeto" });
+    Projeto.hasOne(ServicosBackend, { foreignKey: "IdProjeto" });
 
     AmbienteProjeto.belongsTo(Projeto, { foreignKey: "IdProjeto", targetKey: "Id" });
     AtivosDevices.belongsTo(Projeto, { foreignKey: "IdProjeto", targetKey: "Id" });
