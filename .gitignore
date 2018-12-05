@@ -2,3 +2,4 @@ node_modules
 iisnode
 index.js.debug
 index.js.log
+.vscode
