@@ -8,15 +8,15 @@ var padroesController = {
 };
 
 module.exports = function(app) {
+  var PadroesModel = app.models.padroesRequerimentos;
+
   padroesController.getPadroes = function(req, res) {
-    var PadroesModel = app.models.padroesRequerimentos;
     PadroesModel.findAll({})
     .then((padroes) => res.status(200).json(padroes))
     .catch((error) => res.status(400).json(error));
   };
 
   padroesController.getPadroesId = function(req, res) {
-    var PadroesModel = app.models.padroesRequerimentos;
     PadroesModel.findOne({
       where: { Id: parseInt(req.params.id) }
     })
@@ -32,7 +32,6 @@ module.exports = function(app) {
   };
 
   padroesController.getPadroesIdProjeto = function(req, res) {
-    var PadroesModel = app.models.padroesRequerimentos;
     PadroesModel.findAll({
       where: { IdProjeto: parseInt(req.params.id) }
     })
@@ -41,7 +40,6 @@ module.exports = function(app) {
   };
   
   padroesController.postPadroes = function(req, res) {
-    var PadroesModel = app.models.padroesRequerimentos;
     delete req.body.Id;
 
     PadroesModel.create(req.body)
@@ -50,7 +48,6 @@ module.exports = function(app) {
   };
 
   padroesController.putPadroes = function(req, res) {
-    var PadroesModel = app.models.padroesRequerimentos;
     delete req.body.Id;
     delete req.body.IdProjeto;
 
@@ -63,7 +60,6 @@ module.exports = function(app) {
   };
 
   padroesController.deletePadroes = function(req, res) {
-    var PadroesModel = app.models.padroesRequerimentos;
     PadroesModel.destroy({
       where: { Id: parseInt(req.params.id) },
       limit: 1, force: true

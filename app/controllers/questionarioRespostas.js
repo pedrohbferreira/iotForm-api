@@ -8,8 +8,9 @@ var questionarioRespostas = {
 };
 
 module.exports = function (app) {
+	var QuestionariosModel = app.models.questionarioRespostas;
+
 	questionarioRespostas.getQuestionarios = function (req, res) {
-		var QuestionariosModel = app.models.questionarioRespostas;
 		QuestionariosModel.findAll({})
 		.then((questionarios) => res.status(200).json(questionarios))
 		.catch((error) => {
@@ -21,7 +22,6 @@ module.exports = function (app) {
 	};
 
 	questionarioRespostas.getQuestionarioId = function (req, res) {
-		var QuestionariosModel = app.models.questionarioRespostas;
 		QuestionariosModel.findOne({
 			where: { Id: parseInt(req.params.id) }
 		})
@@ -36,7 +36,6 @@ module.exports = function (app) {
 	};
 	
 	questionarioRespostas.getQuestionarioIdProjeto = function(req, res) {
-		var QuestionariosModel = app.models.questionarioRespostas;
 		QuestionariosModel.findAll({
 			where: { IdProjeto: parseInt(req.params.id) }
 		})
@@ -45,16 +44,13 @@ module.exports = function (app) {
 	};
 
 	questionarioRespostas.postQuestionario = function (req, res) {
-		var QuestionariosModel = app.models.questionarioRespostas;
 		delete req.body.Id;
 		QuestionariosModel.create(req.body)
 		.then((questionario) => res.status(201).json(questionario))
 		.catch((error) => res.status(400).json(error));
 	};
 
-	questionarioRespostas.putQuestionario = function (req, res) {
-		var QuestionariosModel = app.models.questionarioRespostas;
-		
+	questionarioRespostas.putQuestionario = function (req, res) {		
 		delete req.body.Id;
 		delete req.body.IdProjeto;
 
@@ -67,7 +63,6 @@ module.exports = function (app) {
 	};
 
 	questionarioRespostas.deleteQuestionario = function (req, res) { 
-		var QuestionariosModel = app.models.questionarioRespostas;
 		QuestionariosModel.destroy({
 			where: { Id: parseInt(req.params.id) },
 			limit: 1, force: true

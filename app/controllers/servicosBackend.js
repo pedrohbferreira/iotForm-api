@@ -8,15 +8,15 @@ var servicosController = {
 };
 
 module.exports = function(app) {
+  var ServicosModel = app.models.servicosBackend;
+  
   servicosController.getServicos = function(req, res) {
-    var ServicosModel = app.models.servicosBackend;
     ServicosModel.findAll({})
     .then((servicos) => res.status(200).json(servicos))
     .catch((error) => res.status(400).json(error));
   };
   
   servicosController.getServicosId = function(req, res) {
-    var ServicosModel = app.models.servicosBackend;
     ServicosModel.findOne({
       where: { Id: parseInt(req.params.id) }
     })
@@ -32,7 +32,6 @@ module.exports = function(app) {
   };
   
   servicosController.getServicosIdProjeto = function(req, res) {
-    var ServicosModel = app.models.servicosBackend;
     ServicosModel.findAll({
       where: { IdProjeto: parseInt(req.params.id) }
     })
@@ -41,7 +40,6 @@ module.exports = function(app) {
   };
   
   servicosController.postServicos = function(req, res) {
-    var ServicosModel = app.models.servicosBackend;
     delete req.body.Id;
     
     ServicosModel.create(req.body)
@@ -50,7 +48,6 @@ module.exports = function(app) {
   };
   
   servicosController.putServicos = function(req, res) {
-    var ServicosModel = app.models.servicosBackend;
     delete req.body.Id;
     delete req.body.IdProjeto;
     
@@ -63,7 +60,6 @@ module.exports = function(app) {
   };
   
   servicosController.deleteServicos = function(req, res) {
-    var ServicosModel = app.models.servicosBackend;
     ServicosModel.destroy({
       where: { Id: parseInt(req.params.id) },
       limit: 1, force: true

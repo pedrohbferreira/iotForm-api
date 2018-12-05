@@ -8,15 +8,15 @@ var ambienteController = {
 };
 
 module.exports = function(app) {
+  var AmbienteModel = app.models.ambienteProjeto;
+
   ambienteController.getAmbiente = function(req, res) {
-    var AmbienteModel = app.models.ambienteProjeto;
     AmbienteModel.findAll({})
     .then((projetos) => res.status(200).json(projetos))
     .catch((error) => res.status(400).json(error));
   };
 
   ambienteController.getAmbienteId = function(req, res) {
-    var AmbienteModel = app.models.ambienteProjeto;
     AmbienteModel.findOne({
       where: { Id: parseInt(req.params.id) }
     })
@@ -32,7 +32,6 @@ module.exports = function(app) {
   };
 
   ambienteController.getAmbienteIdProjeto = function(req, res) {
-    var AmbienteModel = app.models.ambienteProjeto;
     AmbienteModel.findAll({
       where: { IdProejto: parseInt(req.params.idProejto) }
     })
@@ -41,7 +40,6 @@ module.exports = function(app) {
   };
   
   ambienteController.postAmbiente = function(req, res) {
-    var AmbienteModel = app.models.ambienteProjeto;
     delete req.body.Id;
     AmbienteModel.create(req.body)
     .then((ambiente) => res.status(201).json(ambiente))
@@ -49,7 +47,6 @@ module.exports = function(app) {
   };
 
   ambienteController.putAmbiente = function(req, res) {
-    var AmbienteModel = app.models.ambienteProjeto;
     delete req.body.Id;
     delete req.body.IdProjeto;
 
@@ -62,7 +59,6 @@ module.exports = function(app) {
   };
 
   ambienteController.deleteAmbiente = function(req, res) {
-    var AmbienteModel = app.models.ambienteProjeto;
     AmbienteModel.destroy({
       where: { Id: parseInt(req.params.id) },
       limit: 1, force: true

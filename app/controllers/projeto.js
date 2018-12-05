@@ -16,8 +16,9 @@ var projetoController = {
 };
 
 module.exports = function(app) {
+  var ProjetoModel = app.models.projeto;
+
   projetoController.getProjetos = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     ProjetoModel.findAll({})
     .then((projetos) => {
       res.status(200).json(projetos);
@@ -26,7 +27,6 @@ module.exports = function(app) {
   };
 
   projetoController.getProjetoId = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
       
@@ -43,7 +43,6 @@ module.exports = function(app) {
   };
 
   projetoController.getProjetosIdCliente = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     ProjetoModel.findAll({
       where: { IdCliente: parseInt(req.params.idCliente) }
     })
@@ -52,8 +51,6 @@ module.exports = function(app) {
   };
 
   projetoController.postProjeto = function(req, res) {
-    var ProjetoModel = app.models.projeto;
-
     ProjetoModel.create({
       Nome: req.body.Nome, IdCliente: parseInt(req.body.IdCliente)
     })
@@ -62,7 +59,6 @@ module.exports = function(app) {
   };
 
   projetoController.putProjeto = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     delete req.body.Id;
     delete req.body.IdCliente;
 
@@ -75,7 +71,6 @@ module.exports = function(app) {
   };
 
   projetoController.deleteProjeto = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     ProjetoModel.destroy({
       where: { Id: parseInt(req.params.id) },
       limit: 1, force: true
@@ -85,7 +80,6 @@ module.exports = function(app) {
   };
 
   projetoController.getQuestionarios = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var Questionario = app.models.questionarioRespostas;
 
     ProjetoModel.findOne({
@@ -109,12 +103,11 @@ module.exports = function(app) {
   };
 
   projetoController.getAmbienteProjeto = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var AmbienteModel = app.models.ambienteProjeto;
 
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
-      include: [{ model: AmbienteModel, as: "Ambientes" }]
+      include: [{ model: AmbienteModel }]
     })
     .then((projeto) => {
       if(projeto) {
@@ -128,12 +121,11 @@ module.exports = function(app) {
   };
 
   projetoController.getAtivosDevices = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var AtivosModel = app.models.ativosDevices;
 
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
-      include: [{ model: AtivosModel, as: "AtivosDevices" }]
+      include: [{ model: AtivosModel }]
     })
     .then((projeto) => {
       if(projeto) {
@@ -147,12 +139,11 @@ module.exports = function(app) {
   };
 
   projetoController.getComunicacaoConectividade = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var ComunicacaoModel = app.models.comunicacaoConectividade;
 
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
-      include: [{ model: ComunicacaoModel, as: "ComConectividades" }]
+      include: [{ model: ComunicacaoModel }]
     })
     .then((projeto) => {
       if(projeto) {
@@ -166,12 +157,11 @@ module.exports = function(app) {
   };
 
   projetoController.getPadroesRequerimentos = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var PadroesModel = app.models.padroesRequerimentos;
 
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
-      include: [{ model: PadroesModel, as: "PadroesRequerimentos" }]
+      include: [{ model: PadroesModel }]
     })
     .then((projeto) => {
       if(projeto) {
@@ -185,12 +175,11 @@ module.exports = function(app) {
   };
 
   projetoController.getServicosBackend = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var ServicosModel = app.models.servicosBackend;
 
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
-      include: [{ model: ServicosModel, as: "ServicosBackend" }]
+      include: [{ model: ServicosModel }]
     })
     .then((projeto) => {
       if(projeto) {
@@ -204,7 +193,6 @@ module.exports = function(app) {
   };
 
   projetoController.getProjetoCompleto = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var Questionario = app.models.questionarioRespostas;
     var AmbienteModel = app.models.ambienteProjeto;
     var AtivosModel = app.models.ativosDevices;
@@ -214,12 +202,12 @@ module.exports = function(app) {
 
     ProjetoModel.findAll({
       include: [
-        { model: Questionario, as: "Questionarios" },
-        { model: AmbienteModel, as: "Ambientes" },
-        { model: AtivosModel, as: "AtivosDevices" },
-        { model: ComunicacaoModel, as: "ComConectividades" },
-        { model: PadroesModel, as: "PadroesRequerimentos" },
-        { model: ServicosModel, as: "ServicosBackend" }
+        { model: Questionario },
+        { model: AmbienteModel },
+        { model: AtivosModel },
+        { model: ComunicacaoModel },
+        { model: PadroesModel },
+        { model: ServicosModel }
       ]
     })
     .then((projeto) => {
@@ -234,7 +222,6 @@ module.exports = function(app) {
   };
 
   projetoController.getProjetoCompletoId = function(req, res) {
-    var ProjetoModel = app.models.projeto;
     var Questionario = app.models.questionarioRespostas;
     var AmbienteModel = app.models.ambienteProjeto;
     var AtivosModel = app.models.ativosDevices;
@@ -245,12 +232,12 @@ module.exports = function(app) {
     ProjetoModel.findOne({
       where: { Id: parseInt(req.params.id) },
       include: [
-        { model: Questionario, as: "Questionarios" },
-        { model: AmbienteModel, as: "Ambientes" },
-        { model: AtivosModel, as: "AtivosDevices" },
-        { model: ComunicacaoModel, as: "ComConectividades" },
-        { model: PadroesModel, as: "PadroesRequerimentos" },
-        { model: ServicosModel, as: "ServicosBackend" }
+        { model: Questionario },
+        { model: AmbienteModel },
+        { model: AtivosModel },
+        { model: ComunicacaoModel },
+        { model: PadroesModel },
+        { model: ServicosModel }
       ]
     })
     .then((projeto) => {

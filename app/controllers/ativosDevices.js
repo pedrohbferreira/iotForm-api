@@ -8,8 +8,9 @@ var ativosDevicesController = {
 };
 
 module.exports = function(app) {
+    var AtivosModel = app.models.ativosDevices;
+
     ativosDevicesController.getAtivos = function(req, res) {
-        var AtivosModel = app.models.ativosDevices;
         AtivosModel.findAll({})
         .then((ativos) => {
             res.status(200).json(ativos);
@@ -18,7 +19,6 @@ module.exports = function(app) {
     };
 
     ativosDevicesController.getAtivosId = function(req, res) {
-        var AtivosModel = app.models.ativosDevices;
         AtivosModel.findOne({
             where: {Id: parseInt(req.params.id) },
         })
@@ -34,7 +34,6 @@ module.exports = function(app) {
     };
 
     ativosDevicesController.getAtivosIdProjeto = function(req, res) {
-        var AtivosModel = app.models.ativosDevices;
         AtivosModel.findAll({
             where: { IdProjeto: parseInt(req.params.id) }
         })
@@ -43,8 +42,6 @@ module.exports = function(app) {
     };
 
     ativosDevicesController.postAtivos = function(req, res) {
-        var AtivosModel = app.models.ativosDevices;
-
         AtivosModel.create({
             Nome: req.body.Nome, IdProjeto: parseInt(req.body.IdProjeto)
         })
@@ -53,7 +50,6 @@ module.exports = function(app) {
     };
 
     ativosDevicesController.putAtivos = function(req, res) {
-        var AtivosModel = app.models.ativosDevices;
         delete req.body.Id;
         delete req.body.IdProjeto;
 
@@ -64,8 +60,8 @@ module.exports = function(app) {
         .then((results) => res.status(200).json(results[0]))
         .catch((error) => res.status(400).json(error));
     };
+
     ativosDevicesController.deleteAtivos = function(req, res) {
-        var AtivosModel = app.models.ativosDevices;
         AtivosModel.destroy({
             where: { Id: parseInt(req.params.id) },
             limit: 1, force: true
