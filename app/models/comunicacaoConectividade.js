@@ -87,13 +87,14 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		freezeTableName: true,
 		tableName: "ComunicacaoConectividade",
 		getterMethods: {
-			medias() {
+			Medias() {
 				var local = (this.LocalTecnologia + this.LocalLarguraBanda + this.LocalMaximaLatencia) / 3;
 				var remota = (this.RemotaTecnologia + this.RemotaLarguraBanda + this.RemotaMaximaLatencia) / 3;
 				var total = (local + remota) / 2;
 				return {
-					local: parseFloat(new Number(local).toFixed(2)),
-					remota: parseFloat(new Number(remota).toFixed(2))
+					Local: parseFloat(new Number(local).toFixed(2)),
+					Remota: parseFloat(new Number(remota).toFixed(2)),
+					Total: parseFloat(new Number(total).toFixed(2))
 				};
 			}
 		}

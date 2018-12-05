@@ -166,18 +166,18 @@ const AtivosDevices = db.conexao.define("AtivosDevices", {
 		freezeTableName: true,
 		tableName: "AtivosDevices",
 		getterMethods: {
-			medias() {
+			Medias() {
 				var geral = (this.GeralNumeroAtivos + this.GeralValorAtivo + this.GeralValorEconomico + this.GeralComplexidadeAtivo + this.GeralHeteroAtivo) / 5;
 				var poder = (this.PoderLogicaNegocio + this.PoderProcessamento + this.PoderRequerimentos + this.PoderGestaoLocal) / 4;
 				var outros = (this.OutrosFonteEnergia + this.OutrosAmbiente) / 2;
 				var gestao = (this.GestaoVidaUtil + this.GestaoRestricoesHardware + this.GestaoRestricoesSoftware) / 3;
 				var total = (geral + poder + outros + gestao) / 4;
 				return {
-					geral: parseFloat(new Number(geral).toFixed(2)),
-					poderProcess: parseFloat(new Number(poder).toFixed(2)),
-					outros: parsetFloat(new Number(outros).toFixed(2)),
-					gestao: parseFloat(new Number(gestao).toFixed(2)),
-					total: parseFloat(new Number(total).toFixed(2))
+					Geral: parseFloat(new Number(geral).toFixed(2)),
+					PoderProcess: parseFloat(new Number(poder).toFixed(2)),
+					Outros: parsetFloat(new Number(outros).toFixed(2)),
+					Gestao: parseFloat(new Number(gestao).toFixed(2)),
+					Total: parseFloat(new Number(total).toFixed(2))
 				};
 			}
 		}

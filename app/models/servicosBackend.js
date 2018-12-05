@@ -98,16 +98,17 @@ const ServicosBackend = db.conexao.define("ServicosBackend", {
 		freezeTableName: true,
 		tableName: "ServicosBackend",
 		getterMethods: {
-			medias() {
+			Medias() {
 				var geral = (this.GeralEstrategiaAplicacao + this.GeralComplexidadeNegocio + this.GeralIntegracaoBackend) / 3;
 				var gestao = (this.GestaoVolumeDados + this.GestaoVariabilidadeDados + this.GestaoAnalytics) / 3;
 				var total = (geral + gestao) / 2;
 				return {
-					geral: parseFloat(new Number(geral).toFixed(2)),
-					gestao: parseFloat(new Number(gestao).toFixed(2))
+					Geral: parseFloat(new Number(geral).toFixed(2)),
+					Gestao: parseFloat(new Number(gestao).toFixed(2)),
+					Total: parseFloat(new Number(total).toFixed(2))
 				};
 			}
-		}	
+		}
 	}
 );
 

@@ -78,13 +78,14 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
 		freezeTableName: true,
 		tableName: "PadroesRequerimentos",
 		getterMethods: {
-			medias() {
+			Medias() {
 				var requerimentos = (this.RequerimentosRegiao + this.RequerimentosIndustria + this.RequerimentosTecnologia) / 3;
 				var padroes = (this.PadroesFuncionais + this.PadroesTecnicos) / 2;
 				var total = (requerimentos + padroes) / 2;
 				return {
-					requerimentos: parseFloat(new Number(requerimentos).toFixed(2)),
-					padroes: parseFloat(new Number(padroes).toFixed(2))
+					Requerimentos: parseFloat(new Number(requerimentos).toFixed(2)),
+					padroes: parseFloat(new Number(padroes).toFixed(2)),
+					Total: parseFloat(new Number(total).toFixed(2))
 				};
 			}
 		}

@@ -72,11 +72,10 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
 		timestamps: false,
 		freezeTableName: true,
 		tableName: "AmbienteProjeto",
-
 		getterMethods: {
-			medias() {
+			Medias() {
 				var media = (this.AmbienteTempo + this.AmbienteBudget + this.AmbienteFuncionais + this.AmbienteTecnicas) / 4;
-				return { ambiente: parseFloat(new Number(media).toFixed(2)) };
+				return { Ambiente: parseFloat(new Number(media).toFixed(2)) };
 			}
 		}
 	}
