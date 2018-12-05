@@ -1,6 +1,7 @@
 var questionarioRespostas = {
 	getQuestionarios: function (req, res) { },
 	getQuestionarioId: function (req, res) { },
+	getQuestionarioIdProjeto: function(req, res) {},
 	postQuestionario: function (req, res) { },
 	putQuestionario: function (req, res) { },
 	deleteQuestionario: function (req, res) { }
@@ -32,6 +33,15 @@ module.exports = function (app) {
 				res.status(204).end();
 			}
 		});
+	};
+	
+	questionarioRespostas.getQuestionarioIdProjeto = function(req, res) {
+		var QuestionariosModel = app.models.questionarioRespostas;
+		QuestionariosModel.findAll({
+			where: { IdProjeto: parseInt(req.params.id) }
+		})
+		.then((questionarios) => res.status(200).json(questionarios))
+		.catch((error) => res.status(400).json(error));
 	};
 
 	questionarioRespostas.postQuestionario = function (req, res) {

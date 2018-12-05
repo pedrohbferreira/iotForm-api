@@ -309,4 +309,27 @@ retorna o número d elinhas alteradas
 retorna o número d elinhas alteradas  
 
   
+### 7   ServicosBackend
+**rota:** GET /servicos  
+*retorna:* 200 OK ServicosBackend[ ] | 200 OK [ ]  
+  
+**rota:** GET /servicos/:id  
+*retorna:* 200 OK ServicosBackend | 204 No Content  
+  
+**rota:** GET /servicos/projeto/:id  
+*retorna:* 200 OK ServicosBackend | 204 No Content  
+busca todos vinculados a um projeto  
+
+**rota:** POST /servicos  
+*retorna:* 201 OK Created  
+  
+**rota:** PUT /servicos/:id  
+*retorna:* 200 OK int
+retorna o número d elinhas alteradas  
+  
+**rota:** DELETE /servicos/:id  
+*retorna:* 200 OK int  
+retorna o número d elinhas alteradas  
+
+  
   
