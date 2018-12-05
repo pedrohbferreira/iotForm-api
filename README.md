@@ -309,7 +309,7 @@ retorna o número d elinhas alteradas
 retorna o número d elinhas alteradas  
 
   
-### 7   ServicosBackend
+### 8   ServicosBackend
 **rota:** GET /servicos  
 *retorna:* 200 OK ServicosBackend[ ] | 200 OK [ ]  
   

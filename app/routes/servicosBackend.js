@@ -7,7 +7,7 @@ module.exports = function(app) {
 
   app.route("/servicos/:id([0-9]{1,4})")
   .get(servicoController.getServicosId)
-  .put(servicoController.putServicoS)
+  .put(servicoController.putServicos)
   .delete(servicoController.deleteServicos);
 
   app.route("/servicos/projeto/:id([0-9]{1,4})")
