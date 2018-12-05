@@ -8,9 +8,9 @@ var comConectController = {
 };
 
 module.exports = function(app) {
-  comConectController.getComConectividades = function(req, res) {
-    var ComModel = app.models.comunicacaoConectividade;
+  var ComModel = app.models.comunicacaoConectividade;
 
+  comConectController.getComConectividades = function(req, res) {
     ComModel.findAll({})
     .then((comunicacao) => {
       res.status(200).json(comunicacao);
@@ -18,17 +18,23 @@ module.exports = function(app) {
     .catch((error) => res.status(400).json(error));
   };
 
+  comConectController.getComConectividadesId = function(req, res) {
+    ComModel.findOne({
+      where: { Id: parseInt(req.params.id) }
+    })
+    .then((comunicacao) => res.status(200).json(comunicacoes))
+    .catch((error) => res.status(error));
+  };
+
   comConectController.getComConectividadesIdProjeto = function(req, res) {
-    var ComModel = app.models.comunicacaoConectividade;
     ComModel.findAll({
       where: { IdProjeto: parseInt(req.params.id) }
     })
-    .then((padroes) => res.status(200).json(padroes))
+    .then((comunicacoes) => res.status(200).json(comunicacoes))
     .catch((error) => res.status(400).json(error));
   };
   
   comConectController.postComConectividade = function(req, res) {
-    var ComModel = app.models.comunicacaoConectividade;
     delete req.body.Id;
 
     ComModel.create(req.body)
@@ -37,7 +43,6 @@ module.exports = function(app) {
   };
 
   comConectController.putComConectividadese = function(req, res) {
-    var ComModel = app.models.comunicacaoConectividade;
     delete req.body.Id;
     delete req.body.IdProjeto;
 
@@ -50,7 +55,6 @@ module.exports = function(app) {
   };
 
   comConectController.deleteComConectividades = function(req, res) {
-    var ComModel = app.models.comunicacaoConectividade;
     ComModel.destroy({
       where: { Id: parseInt(req.params.id) },
       limit: 1, force: true
