@@ -10,8 +10,12 @@ const Cliente = db.conexao.define("Cliente",
     allowNull: false,
     autoIncrement: true,
     validate: {
-      isInt: true
-    }
+      isInt: { msg: "Id deve ser um número inteiro" }, 
+			min:  { args: "Não pode ser valor negativo" }
+    },
+		set: function(value) {
+			this.setDataValue('Id', parseInt(value));
+		}
   },
 
   RazaoSocial: {
@@ -94,7 +98,10 @@ const Cliente = db.conexao.define("Cliente",
   Numero: {
     type: db.Sequelize.INTEGER,
     allowNull: false,
-    validate: { isInt: true }
+    validate: { isInt: true },
+		set: function(value) {
+			this.setDataValue('Numero', parseInt(value));
+		}
   },
 
   Complemento: {
@@ -135,7 +142,10 @@ const Cliente = db.conexao.define("Cliente",
     defaultValue: 1,
     validate: {
       isIn: { args: [[0, 1]], msg: "Status deve ser 0 ou 1" }, isInt: true
-    }
+    },
+		set: function(value) {
+			this.setDataValue('Status', parseInt(value));
+		}
   }
 },
   {
