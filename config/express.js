@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const consign = require("consign");
 const cors = require("cors");
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 
 module.exports = function () {
@@ -11,6 +13,10 @@ module.exports = function () {
 	// configuração para recebimento de objetos json pelas rotas
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
+
+	// configurações para sessão e cookie
+	app.use(cookieParser());
+	app.use(session({ secret: process.env.IOTcryptKey }));
 
 	// utiliza o methodOverride para requisições via navegador ou que não usam ajax
 	app.use(methodOverride(function(request, respose, next) {
@@ -28,6 +34,7 @@ module.exports = function () {
 	consign({ cwd: "app", verbose: false })
 		.include("models")
 		.then("../config/loadDBdependencies.js")
+		.then("middleware")
 		.then("controllers")
 		.then("routes")
 	.into(app);
