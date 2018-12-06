@@ -28,15 +28,33 @@ module.exports = function(app) {
     })
     .then((relatorio) => {
       if(relatorio) {
-        
+        res.status(200).json(relatorio);
       }
-      res.json(relatorio);
+      else {
+        res.status(204).end();
+      }
     })
-    .catch((error) => {
-      console.log(error);
-      res.json(error);
-    });
+    .catch((error) => res.json(error));
 
+  };
+
+  relatorioController.getRelatorioIdProjeto = function(req, res) {
+    ProjetoModel.findOne({
+      where: { Id: parseInt(req.params.id) },
+      include: [
+        { model: QuestionarioModel }, { model: AmbienteModel }, { model: AtivosModel },
+        { model: ComConectModel }, { model: ServicosBackend }, { model: PadroesModel } 
+      ]
+    })
+    .then((relatorio) => {
+      if(relatorio) {
+        res.status(200).json(relatorio);
+      }
+      else {
+        res.status(204).end();
+      }
+    })
+    .catch((error) => res.status(400).json(error));
   };
 
   return relatorioController;
