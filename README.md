@@ -330,6 +330,58 @@ retorna o número d elinhas alteradas
 **rota:** DELETE /servicos/:id  
 *retorna:* 200 OK int  
 retorna o número d elinhas alteradas  
-
   
   
+  
+### 9 Relatórios  
+**rota:** GET /relatorios/cliente/:id  
+*reorna:* 200 OK Object | 204 No Content  
+```
+{
+  "Cliente": {
+    "Id": 0,
+    ...,
+    "Proejetos": [
+      {
+        "Id": 0,
+        "IdCliente": 0,
+        "Questionario": {
+          "Id": 0
+          "IdProjeto": 0,
+          ...
+        },
+        "AmbienteProjeto: {
+          "Id": 0,
+          "IdProjeto": 0,
+          ...,
+          "Medias": { "Ambiente": 0, "Total": 0 }
+        },
+        "AtivosDevices:" {
+          "Id": 0,
+          "IdProjeto": 0,
+          ...,
+          "Medias": { "Geral": 0, "Porder": 0, "Outros": 0, "Gestao: 0, "Total": 0 }
+        },
+        "ComunicacaoConectividade:" {
+          "Id": 0,
+          "IdProjeto": 0,
+          ...,
+          "Medias": { "Local": 0, "Remota": 0, "Total": 0 }
+        },
+        "ServicosBackend:" {
+          "Id": 0,
+          "IdProjeto": 0,
+          ...,
+          "Medias": { "Geral": 0, "Gestao": 0, "Total": 0 }
+        },
+        "PadroesRequerimento:" {
+          "Id": 0,
+          "IdProjeto": 0,
+          ...,
+          "Medias": { "Requerimentos": 0, "Padroes": 0, "Total": 0 }
+        }
+			}
+    ]
+  }
+}
+```
