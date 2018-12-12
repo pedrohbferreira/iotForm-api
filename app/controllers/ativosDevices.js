@@ -42,10 +42,11 @@ module.exports = function(app) {
     };
 
     ativosDevicesController.postAtivos = function(req, res) {
+        delete req.body.Id;
         AtivosModel.create({
             Nome: req.body.Nome, IdProjeto: parseInt(req.body.IdProjeto)
         })
-        .then((ativos) => res.status(200).json(ativos))
+        .then((ativos) => res.status(201).json(ativos))
         .catch((error) => res.status(400).json(error));
     };
 
