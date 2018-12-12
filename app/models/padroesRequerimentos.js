@@ -9,7 +9,7 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
 		allowNull: false,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('Id', parseInt(value))
@@ -25,7 +25,7 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
 		},
 		validate: { 
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('IdProjeto', parseInt(value))
@@ -84,7 +84,7 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
 				var total = (requerimentos + padroes) / 2;
 				return {
 					Requerimentos: parseFloat(new Number(requerimentos).toFixed(2)),
-					padroes: parseFloat(new Number(padroes).toFixed(2)),
+					Padroes: parseFloat(new Number(padroes).toFixed(2)),
 					Total: parseFloat(new Number(total).toFixed(2))
 				};
 			}

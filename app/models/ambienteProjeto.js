@@ -9,7 +9,7 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
 		primaryKey: true,
 		validate: {
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function (value) {
 			this.setDataValue('Id', parseInt(value));
@@ -21,7 +21,7 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
 		allowNull: false,
 		validate: {
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		references: {
 			model: "Projeto",
@@ -75,7 +75,11 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
 		getterMethods: {
 			Medias() {
 				var media = (this.AmbienteTempo + this.AmbienteBudget + this.AmbienteFuncionais + this.AmbienteTecnicas) / 4;
-				return { Ambiente: parseFloat(new Number(media).toFixed(2)) };
+				var ambiente = total =  parseFloat(new Number(media).toFixed(2));
+				return { 
+					Ambiente: ambiente,
+					Total: total
+				};
 			}
 		}
 	}

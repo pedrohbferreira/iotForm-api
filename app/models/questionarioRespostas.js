@@ -9,7 +9,7 @@ const QuestionarioRespostas = db.conexao.define("QuestionarioRespostas", {
 		primaryKey: true,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('Id', parseInt(value));
@@ -21,7 +21,7 @@ const QuestionarioRespostas = db.conexao.define("QuestionarioRespostas", {
 		allowNull: false,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		references: {
 			model: "Projeto",

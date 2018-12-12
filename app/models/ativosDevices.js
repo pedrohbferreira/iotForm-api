@@ -12,7 +12,7 @@ const AtivosDevices = db.conexao.define("AtivosDevices", {
 			min:  { args: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
-			this.setDataValues('Id', parseInt(value))
+			this.setDataValue('Id', parseInt(value))
 		}
 	},
 
@@ -25,10 +25,10 @@ const AtivosDevices = db.conexao.define("AtivosDevices", {
 		},
 		validate: { 
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
-			this.setDataValues('IdProjeto', parseInt(value))
+			this.setDataValue('IdProjeto', parseInt(value))
 		}
 	},
 
@@ -174,8 +174,8 @@ const AtivosDevices = db.conexao.define("AtivosDevices", {
 				var total = (geral + poder + outros + gestao) / 4;
 				return {
 					Geral: parseFloat(new Number(geral).toFixed(2)),
-					PoderProcess: parseFloat(new Number(poder).toFixed(2)),
-					Outros: parsetFloat(new Number(outros).toFixed(2)),
+					Poder: parseFloat(new Number(poder).toFixed(2)),
+					Outros: parseFloat(new Number(outros).toFixed(2)),
 					Gestao: parseFloat(new Number(gestao).toFixed(2)),
 					Total: parseFloat(new Number(total).toFixed(2))
 				};

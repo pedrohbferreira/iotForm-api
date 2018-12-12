@@ -9,7 +9,7 @@ const ServicosBackend = db.conexao.define("ServicosBackend", {
 		autoIncrement: true,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('Id', parseInt(value))
@@ -24,7 +24,7 @@ const ServicosBackend = db.conexao.define("ServicosBackend", {
 		},
 		validate: { 
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('IdProjeto', parseInt(value))

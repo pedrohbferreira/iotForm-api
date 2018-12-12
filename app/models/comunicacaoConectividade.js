@@ -9,10 +9,10 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		autoIncrement: true,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
-			this.setDataValues('Id', parseInt(value))
+			this.setDataValue('Id', parseInt(value))
 		}
 	},
 
@@ -25,10 +25,10 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		},
 		validate: {
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
-			this.setDataValues('IdProjeto', parseInt(value))
+			this.setDataValue('IdProjeto', parseInt(value))
 		}
 	},
 
@@ -36,7 +36,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		type: db.Sequelize.TINYINT, allowNull: false,
 		validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } },
 		set: function(value) {
-			this.setDataValues('LocalTecnologia', parseInt(value))
+			this.setDataValue('LocalTecnologia', parseInt(value))
 		}
 	},
 	LocalTecnologiaC: { type: db.Sequelize.TEXT, allowNull: true },
@@ -44,7 +44,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		type: db.Sequelize.TINYINT, allowNull: false,
 		validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } },
 		set: function(value) {
-			this.setDataValues('LocalLarguraBanda', parseInt(value))
+			this.setDataValue('LocalLarguraBanda', parseInt(value))
 		}
 	},
 	LocalLarguraBandaC: { type: db.Sequelize.TEXT, allowNull: true },
@@ -52,7 +52,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		type: db.Sequelize.TINYINT, allowNull: false,
 		validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } },
 		set: function(value) {
-			this.setDataValues('LocalMaximaLatencia', parseInt(value))
+			this.setDataValue('LocalMaximaLatencia', parseInt(value))
 		}
 	},
 	LocalMaximaLatenciaC: { type: db.Sequelize.TEXT, allowNull: true },
@@ -61,7 +61,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		type: db.Sequelize.TINYINT, allowNull: false,
 		validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } },
 		set: function(value) {
-			this.setDataValues('RemotaTecnologia', parseInt(value))
+			this.setDataValue('RemotaTecnologia', parseInt(value))
 		}
 	},
 	RemotaTecnologiaC: { type: db.Sequelize.TEXT, allowNull: true },
@@ -69,7 +69,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		type: db.Sequelize.TINYINT, allowNull: false,
 		validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } },
 		set: function(value) {
-			this.setDataValues('RemotaLarguraBanda', parseInt(value))
+			this.setDataValue('RemotaLarguraBanda', parseInt(value))
 		}
 	},
 	RemotaLarguraBandaC: { type: db.Sequelize.TEXT, allowNull: true },
@@ -77,7 +77,7 @@ const ComunicacaoConectividade = db.conexao.define("ComunicacaoConectividade", {
 		type: db.Sequelize.TINYINT, allowNull: false,
 		validate: { isInt: true, isIn: { args: [[1, 2, 3, 4]], msg: "Deve estar entre 1 e 4." } },
 		set: function(value) {
-			this.setDataValues('RemotaMaximaLatencia', parseInt(value))
+			this.setDataValue('RemotaMaximaLatencia', parseInt(value))
 		}
 	},
 	RemotaMaximaLatenciaC: { type: db.Sequelize.TEXT, allowNull: true }

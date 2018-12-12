@@ -9,7 +9,7 @@ const Projeto = db.conexao.define("Projeto", {
 		primaryKey: true,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], mgs: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('Id', parseInt(value));
@@ -29,7 +29,7 @@ const Projeto = db.conexao.define("Projeto", {
 		},
 		validate: { 
 			isInt: { msg: "IdCliente deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
 		set: function(value) {
 			this.setDataValue('IdCliente', parseInt(value));

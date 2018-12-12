@@ -11,7 +11,7 @@ const Cliente = db.conexao.define("Cliente",
     autoIncrement: true,
     validate: {
       isInt: { msg: "Id deve ser um número inteiro" }, 
-			min:  { args: "Não pode ser valor negativo" }
+			min:  { args: [0], msg: "Não pode ser valor negativo" }
     },
 		set: function(value) {
 			this.setDataValue('Id', parseInt(value));
