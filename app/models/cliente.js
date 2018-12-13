@@ -123,6 +123,13 @@ const Cliente = db.conexao.define("Cliente",
     validate: { len: { args: [0, 30], msg: "Cidade deve conter até 30 caracteres." } }
   },
 
+  Bairro: {
+    type: db.Sequelize.STRING,
+    allowNull: true,
+    defaultValue: "",
+    validate: { len: { args: [0, 60], msg: "Cidade deve conter até 30 caracteres." } }
+  },
+
   Senha: {
     type: db.Sequelize.STRING,
     allowNull: false,
