@@ -1,3 +1,6 @@
+
+const Op = require('sequelize').Op;
+
 var projetoController = {
   getProjetos: function(req, res) {},
   getProjetoId: function(req, res) {},
@@ -19,7 +22,13 @@ module.exports = function(app) {
   var ProjetoModel = app.models.projeto;
 
   projetoController.getProjetos = function(req, res) {
-    ProjetoModel.findAll({})
+    var queryString = {};
+
+    if(req.query.nome) {
+      queryString.where = { Nome: { [Op.like]: '%' + String(req.query.nome) + '%' } };
+    }
+
+    ProjetoModel.findAll(queryString)
     .then((projetos) => {
       res.status(200).json(projetos);
     })

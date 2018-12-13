@@ -8,6 +8,10 @@ module.exports = function(app) {
     const PadroesRequerimentos = app.models.padroesRequerimentos;
     const QuestionarioRespostas = app.models.questionarioRespostas;
     const ServicosBackend = app.models.servicosBackend;
+    const Logins = app.models.logins;
+
+    Cliente.hasOne(Logins, { foreignKey: "IdCliente" });
+    Logins.belongsTo(Cliente, { foreignKey: "IdCliente", targetKey: "Id" });
     
     Cliente.hasMany(Projeto, { foreignKey: "IdCliente", sourceKey: "Id" });
     Projeto.belongsTo(Cliente, { foreignKey: "IdCliente", targetKey: "Id"});

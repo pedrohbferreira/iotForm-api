@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const consign = require("consign");
 const cors = require("../config/corsConfig");
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
 
@@ -16,7 +15,6 @@ module.exports = function () {
 
 	// configurações para sessão e cookie
 	app.use(cookieParser());
-	app.use(session({ secret: process.env.IOTcryptKey }));
 
 	app.use(cors());
 
