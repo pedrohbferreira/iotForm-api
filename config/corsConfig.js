@@ -10,7 +10,7 @@ module.exports = function() {
 
   var config = {
     origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1 || !origin) {
+      if (whiteList.indexOf(origin) !== -1 || !origin) {
         callback(null, true)
       } else {
         callback(new Error('Not allowed by CORS'))
