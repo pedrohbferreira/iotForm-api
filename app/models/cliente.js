@@ -48,7 +48,7 @@ const Cliente = db.conexao.define("Cliente",
     type: db.Sequelize.STRING,
     allowNull: false,
     defaultValue: "",
-    validate: { len: { args: [0, 30], msg: "Máximo de 30 caracteres." } }
+    validate: { len: { args: [0, 100], msg: "Máximo de 30 caracteres." } }
   },
 
   NomeContato: {
