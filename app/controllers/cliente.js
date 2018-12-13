@@ -1,3 +1,5 @@
+const Op = require('sequelize').Op;
+
 var clienteController = {
 	getClientes: function (res, req) { },
 	getClienteId: function (res, req) { },
@@ -10,10 +12,22 @@ var clienteController = {
 module.exports = function (app) {
 	clienteController.getClientes = function (req, res) {
 		var ClienteModel = app.models.cliente;
-		ClienteModel.findAll({
+
+		var queryOptions = {
 			where: { Status: 1 },
 			attributes: { exclude: ['Senha'] }
-		})
+		};
+
+		if (req.query.nome) {
+			queryOptions.where = {
+				Status: 1, 
+				NomeFantasia: {
+					[Op.like]: '%' + String(req.query.nome).toLowerCase() + '%'
+				}
+			};
+		}
+
+		ClienteModel.findAll(queryOptions)
 		.then((clientes) => {
 			res.status(200).json(clientes);
 		})
