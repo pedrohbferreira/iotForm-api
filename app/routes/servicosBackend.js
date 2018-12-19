@@ -11,5 +11,5 @@ module.exports = function(app) {
   .delete(servicoController.deleteServicos);
 
   app.route("/servicos/projeto/:id([0-9]{1,4})")
-  .get(servicoController.getServicosIdProjeto)
+  .get(servicoController.getServicosIdProjeto);
 };

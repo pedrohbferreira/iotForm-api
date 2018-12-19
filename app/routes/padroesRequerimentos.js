@@ -5,11 +5,11 @@ module.exports = function(app) {
   .get(padroesController.getPadroes)
   .post(padroesController.postPadroes);
 
-  app.route('/padroes/:id')
+  app.route('/padroes/:id([0-9]{1,4})')
   .get(padroesController.getPadroesId)
   .put(padroesController.putPadroes)
   .delete(padroesController.deletePadroes);
 
-  app.route('/padroes/projeto/:id')
+  app.route('/padroes/projeto/:id([0-9]{1,4})')
   .get(padroesController.getPadroesIdProjeto);
 };

@@ -5,7 +5,7 @@ module.exports = function(app) {
   .get(ambienteController.getAmbiente)
   .post(ambienteController.postAmbiente);
 
-  app.route('/ambienteProejto/:id')
+  app.route('/ambienteProejto/:id([0-9]{1,4})')
   .get(ambienteController.getAmbienteId)
   .put(ambienteController.putAmbiente)
   .delete(ambienteController.deleteAmbiente);

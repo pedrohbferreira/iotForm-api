@@ -10,5 +10,6 @@ module.exports = function(app) {
 	.put(questionarioController.putQuestionario)
 	.delete(questionarioController.deleteQuestionario);
 
-	app.route(questionarioController.getQuestionarioIdProjeto)
+	app.route("/questionario/projeto/:id([0-9]{1,4})")
+	.get(questionarioController.getQuestionarioIdProjeto)
 };

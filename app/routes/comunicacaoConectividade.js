@@ -5,11 +5,11 @@ module.exports = function(app) {
   .get(comConectController.getComConectividades)
   .post(comConectController.postComConectividade);
 
-  app.route('/comConect/:id')
+  app.route('/comConect/:id([0-9]{1,4})')
   .get(comConectController.getComConectividadesId)
   .put(comConectController.putComConectividadese)
   .delete(comConectController.deleteComConectividades);
 
-  app.route('/comConect/projeto/:id')
+  app.route('/comConect/projeto/:id([0-9]{1,4})')
   .get(comConectController.getComConectividadesIdProjeto);
 };
