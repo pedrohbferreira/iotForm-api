@@ -32,6 +32,9 @@ CREATE TABLE Logins (
 	CONSTRAINT pk_idLogin PRIMARY KEY(Id),
 	CONSTRAINT fk_idcliente FOREIGN KEY (IdCliente)
 		REFERENCES Cliente(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT unique_token UNIQUE(Token)
 );
 
 CREATE TABLE Projeto (
@@ -42,6 +45,8 @@ CREATE TABLE Projeto (
 	CONSTRAINT pk_projeto_id PRIMARY KEY(Id),
 	CONSTRAINT fk_projetos_id_cliente FOREIGN KEY(IdCliente) 
 		REFERENCES Cliente(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 
@@ -84,6 +89,9 @@ CREATE TABLE AtivosDevices (
 	CONSTRAINT PkAtivosDevices PRIMARY KEY(Id),
 	CONSTRAINT FkAtivosDevices FOREIGN KEY(IdProjeto)
 		REFERENCES Projeto(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_unique_at_devices UNIQUE(IdProjeto)
 );
 
 CREATE TABLE ComunicacaoConectividade(
@@ -107,6 +115,9 @@ CREATE TABLE ComunicacaoConectividade(
 	CONSTRAINT PkComunicacaoConectividade PRIMARY KEY(Id),
 	CONSTRAINT FKComunicacaoConectividade FOREIGN KEY(IdProjeto)
 		REFERENCES Projeto(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_unique_com_conect UNIQUE(IdProjeto)
 );
 
 CREATE TABLE ServicosBackend(
@@ -131,6 +142,9 @@ CREATE TABLE ServicosBackend(
 	CONSTRAINT PkServicosBackend PRIMARY KEY(Id),
 	CONSTRAINT FkServicosBackend FOREIGN KEY(IdProjeto)
 		REFERENCES Projeto(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_unique_serv_backend UNIQUE(IdProjeto)
 );
 
 CREATE TABLE PadroesRequerimentos(
@@ -151,6 +165,9 @@ CREATE TABLE PadroesRequerimentos(
 	CONSTRAINT PkPadroesRequerimentos PRIMARY KEY(Id),
 	CONSTRAINT FkPadroesRequerimentos FOREIGN KEY(IdProjeto)
 		REFERENCES Projeto(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_unique_paroes_req UNIQUE(IdProjeto)
 );
 
 CREATE TABLE AmbienteProjeto(
@@ -169,6 +186,9 @@ CREATE TABLE AmbienteProjeto(
 	CONSTRAINT PkAmbienteProjeto PRIMARY KEY(Id),
 	CONSTRAINT FkAmbienteProjeto FOREIGN KEY(IdProjeto)
 		REFERENCES Projeto(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_unique_ab_projeto UNIQUE(IdProjeto)
 );
 
 
@@ -200,4 +220,7 @@ CREATE TABLE QuestionarioRespostas(
 	CONSTRAINT PkQuestionarioRespostas PRIMARY KEY(Id),
 	CONSTRAINT FkQuestionarioProjeto FOREIGN KEY(IdProjeto)
 		REFERENCES Projeto(Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT unique_questionario UNIQUE(IdProjeto)
 );

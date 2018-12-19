@@ -19,6 +19,7 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
 	IdProjeto: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false,
+		unique: true,
 		validate: {
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
 			min:  { args: [0], msg: "Não pode ser valor negativo" }
@@ -27,6 +28,8 @@ const AmbienteProjeto = db.conexao.define("AmbienteProjeto", {
 			model: "Projeto",
 			key: "Id"
 		},
+		onDelete: "CASCADE",
+		onUpdate: "CASCADE",
 		set: function (value) {
 			this.setDataValue('IdProjeto', parseInt(value));
 		}

@@ -24,17 +24,24 @@ const Logins = db.conexao.define("Logins", {
     references: {
       model: "Cliente",
       key: "Id"
-    }
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
   },
 
   DataHora: {
-    type: db.Sequelize.DATE,
-    allowNull: false
+    type: db.Sequelize.STRING,
+    allowNull: false,
+    set: function(data) {
+      var dtString =  data.toLocaleDateString() + ' ' + data.toLocaleTimeString();
+      this.setDataValue('DataHora', dtString);
+    }
   },
 
   Token: {
     type: db.Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   }
 }, {
   timestamps: false,

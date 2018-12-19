@@ -19,6 +19,7 @@ const QuestionarioRespostas = db.conexao.define("QuestionarioRespostas", {
 	IdProjeto: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false,
+		unique: true,
 		validate: { 
 			isInt: { msg: "Id deve ser um número inteiro" }, 
 			min:  { args: [0], msg: "Não pode ser valor negativo" }
@@ -27,6 +28,8 @@ const QuestionarioRespostas = db.conexao.define("QuestionarioRespostas", {
 			model: "Projeto",
 			key: "Id"
 		},
+		onDelete: "CASCADE",
+		onUpdate: "CASCADE",
 		set: function(value) {
 			this.setDataValue('IdProjeto', parseInt(value));
 		}

@@ -18,6 +18,7 @@ const ServicosBackend = db.conexao.define("ServicosBackend", {
 	IdProjeto: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false,
+		unique: true,
 		references: {
 			model: "Projeto",
 			key: "Id"
@@ -26,6 +27,8 @@ const ServicosBackend = db.conexao.define("ServicosBackend", {
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
 			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
+		onDelete: "CASCADE",
+		onUpdate: "CASCADE",
 		set: function(value) {
 			this.setDataValue('IdProjeto', parseInt(value))
 		}

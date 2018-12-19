@@ -19,6 +19,7 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
 	IdProjeto: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false,
+		unique: true,
 		references: {
 			model: "Projeto",
 			key: "Id"
@@ -27,6 +28,8 @@ const PadroesRequerimentos = db.conexao.define("PadroesRequerimentos", {
 			isInt: { msg: "IdProjeto deve ser um número inteiro" }, 
 			min:  { args: [0], msg: "Não pode ser valor negativo" }
 		},
+		onDelete: "CASCADE",
+		onUpdate: "CASCADE",
 		set: function(value) {
 			this.setDataValue('IdProjeto', parseInt(value))
 		}
