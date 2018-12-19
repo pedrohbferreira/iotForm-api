@@ -4,6 +4,7 @@ const methodOverride = require("method-override");
 const consign = require("consign");
 const cors = require("../config/corsConfig");
 const cookieParser = require('cookie-parser');
+const basicAuth = require('../app/middleware/authenticate')();
 
 
 module.exports = function () {
@@ -26,6 +27,16 @@ module.exports = function () {
 			return method;
 		}
 	}));
+
+	
+	app.use(function(req, res, next) {
+		if(!req.path.match(/^\/login$/)) {
+			basicAuth.autenticar(req, res, next);
+		}
+		else {
+			res.send('não precisa autenticar');
+		}
+	});
 
 	// para pegar porta do azure
 	app.set("port", process.env.PORT || 3001);

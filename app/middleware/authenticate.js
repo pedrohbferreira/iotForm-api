@@ -20,6 +20,7 @@ module.exports = function(app) {
     // pega o token
     // pega id
     // 
+    res.send('tem que altenticar as rotas');
   };
 
   return auth;

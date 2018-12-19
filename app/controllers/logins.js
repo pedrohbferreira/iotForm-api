@@ -1,7 +1,18 @@
 const crypto = require('crypto');
+const Op = require('sequelize').Op;
 
 module.exports = function(app) {
   var logcontroller = {};
+
+  /**
+   * Remove o T e .000Z do formato ISO String da data
+   * Facilitando a busca com o like na base de dados
+   * @param {Date} data 
+   */
+  var dataParaPesquisa = function(data) {
+    var dtString = data.toISOString().split('T')[0];
+    return '%' + dtString + '%';
+  };
 
   var hashValue = function(value) {
     var hmac = crypto.createHmac('sha256', process.env.IOTcryptKey);
@@ -22,19 +33,43 @@ module.exports = function(app) {
       attributes: ['Id']
     })
     .then((cliente) => {
-      var hoje = new Date();
-      var token = hashValue(email + senha);
+      if(!cliente) {
+        res.status(400).json("Usuário ou senha inválidos.")
+      }
+      else {
+        var hoje = new Date();
+        var token = hashValue(email + senha + hoje.toISOString());
 
-      LoginModel.create({
-        Token: token, DataHora: hoje, IdCliente: cliente.Id
-      })
-      .then((login) => {
-        res.cookie('token', token);
-        res.status(200).json({ idCliente: cliente.Id, token: token });
-      })
-      .catch(erro => res.status(404).json(erro));
+        LoginModel.findOrCreate({
+          where: { IdCliente: cliente.Id, DataHora: { [Op.like]: dataParaPesquisa(hoje) } },
+          limit: 1,
+          defaults: {
+            Token: token, DataHora: hoje, IdCliente: cliente.Id
+          }
+        })
+        .spread((login, created) => {
+          if(created) {
+            res.cookie('token', token, { httpOnly: true });
+            res.status(200).json({ idCliente: cliente.Id, token: token });
+          }
+          else {
+            LoginModel.update({
+              Token: token, DataHora: hoje
+            },{
+              where: { Id: login.Id },
+              fields: ['Token', 'DataHora'], limit: 1
+            })
+            .then((result) => {
+              res.cookie('token', token, { httpOnly: true });
+              res.status(200).json({ idCliente: cliente.Id, token: token });
+            })
+            .catch((error) => res.status(400).json(String(error)));
+          }
+        })
+        .catch((error) => res.status(400).json(String(error)));
+      }
     })
-    .catch((error) => res.status(404).json(error));
+    .catch((error) => res.status(404).json(String(error)));
   };
 
   logcontroller.loggout = function(req, res) {};
