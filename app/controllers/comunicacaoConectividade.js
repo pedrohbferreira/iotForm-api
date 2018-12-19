@@ -35,11 +35,29 @@ module.exports = function(app) {
   };
   
   comConectController.postComConectividade = function(req, res) {
-    delete req.body.Id;
-
-    ComModel.create(req.body)
-    .then((comunicacao) => res.status(201).json(comunicacao))
-    .catch((error) => res.status(400).json(error));
+    var body = req.body;
+    ComModel.findOrCreate({
+      where: { IdProjeto: body.IdProjeto },
+      defaults: body
+    })
+    .spread((comConect, created) => {
+      if(created) {
+        res.status(201).json(comConect);
+      }
+      else {
+        ComModel.update(body, {
+          where: { Id: comConect.Id },
+          fields: Object.keys(body), limit: 1
+        })
+        .then((result) => {
+          body.Id = comConect.Id;
+          var com = ComModel.build(body);
+          res.status(200).json(com);
+        })
+        .catch((error) => res.status(400).json(String(error)));
+      }
+    })
+    .catch((error) => res.status(400).json(String(error)));
   };
 
   comConectController.putComConectividadese = function(req, res) {

@@ -40,11 +40,29 @@ module.exports = function(app) {
   };
   
   padroesController.postPadroes = function(req, res) {
-    delete req.body.Id;
-
-    PadroesModel.create(req.body)
-    .then((padrao) => res.status(201).json(padrao))
-    .catch((error) => res.status(400).json(error));
+    var body = req.body;
+    PadroesModel.findOrCreate({
+      where: { IdProjeto: body.IdProjeto },
+      defaults: body
+    })
+    .spread((padroes, created) => {
+      if(created) {
+        res.status(201).json(padroes);
+      }
+      else {
+        PadroesModel.update(body, {
+          where: { Id: padroes.Id },
+          fields: Object.keys(body), limit: 1
+        })
+        .then((result) => {
+          body.Id = padroes.Id;
+          var padrao = PadroesModel.build(body);
+          res.status(200).json(padrao);
+        })
+        .catch((error) => res.status(400).json(String(error)));
+      }
+    })
+    .catch((error) => res.status(400).json(String(error)));
   };
 
   padroesController.putPadroes = function(req, res) {

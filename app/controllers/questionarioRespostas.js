@@ -44,10 +44,29 @@ module.exports = function (app) {
 	};
 
 	questionarioRespostas.postQuestionario = function (req, res) {
-		delete req.body.Id;
-		QuestionariosModel.create(req.body)
-		.then((questionario) => res.status(201).json(questionario))
-		.catch((error) => res.status(400).json(error));
+		var body = req.body;
+
+		QuestionariosModel.findOrCreate({
+			where: { IdProjeto: body.IdProjeto },
+			defaults: body
+		})
+		.spread((questionario, created) => {
+			if(created) {
+				res.status(201).json(questionario);
+			}
+			else {
+				QuestionariosModel.update(body, {
+					where: { Id: questionario.Id },
+					fields: Object.keys(body), limit: 1
+				})
+				.then((result) => {
+					body.Id = questionario.Id;
+					res.status(200).json(body);
+				})
+				.catch((error) => res.status(400).json(String(error)));
+			}
+		})
+		.catch((error) => res.status(400).json(String(error)));
 	};
 
 	questionarioRespostas.putQuestionario = function (req, res) {		

@@ -40,11 +40,29 @@ module.exports = function(app) {
   };
   
   servicosController.postServicos = function(req, res) {
-    delete req.body.Id;
-    
-    ServicosModel.create(req.body)
-    .then((servico) => res.status(201).json(servico))
-    .catch((error) => res.status(400).json(error));
+    var body = req.body;
+    ServicosModel.findOrCreate({
+      where: { IdProjeto: body.IdProjeto },
+      defaults: body
+    })
+    .spread((servicos, created) => {
+      if(created) {
+        res.status(201).json(servicos);
+      }
+      else {
+        ServicosModel.update(body, {
+          where: { Id: servicos.Id },
+          fields: Object.keys(body), limit: 1
+        })
+        .then((result) => {
+          body.Id = servicos.Id;
+          var servico = ServicosModel.build(body);
+          res.status(200).json(servico);
+        })
+        .catch((error) => res.status(400).json(String(error)));
+      }
+    })
+    .catch((error) => res.status(400).json(String(error)));
   };
   
   servicosController.putServicos = function(req, res) {
