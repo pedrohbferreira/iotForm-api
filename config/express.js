@@ -35,10 +35,10 @@ module.exports = function () {
 		}
 		else {
 			if(!req.cookies.token){
-				res.status(400).json("Não foi identiicado o token");
+				return res.status(400).json("Não foi identiicado o token");
 			}
 			else{
-				basicAuth.autenticar(req, res, next);
+				return basicAuth.autenticar(req, res, next);
 			}
 		}
 	});

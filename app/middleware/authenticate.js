@@ -85,7 +85,7 @@ module.exports = function(app) {
     })
     .catch((error) => {
       res.status(400).json(String(error));
-      console.log('tem que altenticar as rotas');
+      console.log(String(error));
     });
   };
 
