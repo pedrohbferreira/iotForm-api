@@ -29,26 +29,26 @@ module.exports = function () {
 	}));
 
 	// autentica as rotas
-	app.use(function(req, res, next) {
-		if(req.path.match(/^\/login$/)) {
-			next();
-		}
-		else {
-			if(!req.cookies.token){
-				res.status(400).json("Não foi identiicado o token");
-			}
-			else{
-				try {
-					basicAuth.autenticar(req, res, next);
+	// app.use(function(req, res, next) {
+	// 	if(req.path.match(/^\/login$/)) {
+	// 		next();
+	// 	}
+	// 	else {
+	// 		if(!req.cookies.token){
+	// 			res.status(400).json("Não foi identiicado o token");
+	// 		}
+	// 		else{
+	// 			try {
+	// 				basicAuth.autenticar(req, res, next);
 
-				}
-				catch(e) {
-					console.log(e);
-					res.status(400).json(String(e));
-				}
-			}
-		}
-	});
+	// 			}
+	// 			catch(e) {
+	// 				console.log(e);
+	// 				res.status(400).json(String(e));
+	// 			}
+	// 		}
+	// 	}
+	// });
 
 	// para pegar porta do azure
 	app.set("port", process.env.PORT || 3001);
