@@ -38,7 +38,14 @@ module.exports = function () {
 				res.status(400).json("Não foi identiicado o token");
 			}
 			else{
-				basicAuth.autenticar(req, res, next);
+				try {
+					basicAuth.autenticar(req, res, next);
+
+				}
+				catch(e) {
+					console.log(e);
+					res.status(400).json(String(e));
+				}
 			}
 		}
 	});
