@@ -28,16 +28,19 @@ module.exports = function(app) {
     var methods = ['GET', 'POST', 'PUT', 'DELETE'];
     console.log(route);
     if(idCliente != 0) {
-      if(negatedRotues.indexOf(route) >= 0 && methods.indexOf(method) >= 0) {
+      if(negatedRotues.indexOf(route) >= 0 && (method == "GET" || method == "POST")) {
+        console.log('n pode - false');
         return false;
       }
     }
+    console.log('pode - true');
     return true;
   }
 
   var hashValue = function(value) {
     var hmac = crypto.createHmac('sha256', process.env.IOTcryptKey);
     hmac.update(value);
+    console.log('cria hash');
     return hmac.digest('hex');
   };
   
