@@ -57,32 +57,35 @@ module.exports = function(app) {
       if(!login) {
         res.status(400).json("Deve-se atutenticar!");
       }
-      else if(authRoutes(login.IdCliente, req.method, req.path)) {
-        console.log('gera novo token');
-        var agora = new Date();
-        var novoToken = hashValue(token + '' + agora.getTime());
-        console.log(agora, novoToken);
 
-        if(diffDatas(login.DataHora) > (24* 60 * 60)) {
-          loginModel.update({
-            Token: novoToken, DataHora: agora
-          },{
-            where: { Id: login.Id }
-          })
-          .then((result) => {
-            console.log('atualiza e segue');
-            res.cookie('token', novoToken, { httpOnly: true });
-          })
-          .catch((error) => {
-            console.log('erro aqui');
-            console.log(String(error));
-            res.status(400).json(String(error));
-          });
-        }
-        next();
-      }
       else {
-        return res.status(400).json("Usuário não pode acessar esta rota!");
+        if(authRoutes(login.IdCliente, req.method, req.path)) {
+          console.log('gera novo token');
+          var agora = new Date();
+          var novoToken = hashValue(token + '' + agora.getTime());
+          console.log(agora, novoToken);
+
+          if(diffDatas(login.DataHora) > (24* 60 * 60)) {
+            loginModel.update({
+              Token: novoToken, DataHora: agora
+            },{
+              where: { Id: login.Id }
+            })
+            .then((result) => {
+              console.log('atualiza e segue');
+              res.cookie('token', novoToken, { httpOnly: true });
+            })
+            .catch((error) => {
+              console.log('erro aqui');
+              console.log(String(error));
+              res.status(400).json(String(error));
+            });
+          }
+          next();
+        }
+        else {
+          res.status(400).json("Usuário não pode acessar esta rota!");
+        }
       }
     })
     .catch((error) => {
