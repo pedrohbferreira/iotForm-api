@@ -58,6 +58,7 @@ module.exports = function(app) {
         console.log('gera novo token');
         var agora = new Date();
         var novoToken = hashValue(token + '' + agora.getTime());
+        console.log(agora, novoToken);
 
         if(diffDatas(login.DataHora) > (24* 60 * 60)) {
           loginModel.update({
@@ -68,16 +69,14 @@ module.exports = function(app) {
           .then((result) => {
             console.log('atualiza e segue');
             res.cookie('token', novoToken, { httpOnly: true });
-            next();
           })
           .catch((error) => {
             console.log('erro aqui');
-            res.status(400).json(String(error))
+            console.log(String(error));
+            res.status(400).json(String(error));
           });
         }
-        else {
-          next();
-        }
+        next();
       }
       else {
         res.status(400).json('Usuário não pode acessar esta rota!');
