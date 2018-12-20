@@ -28,13 +28,18 @@ module.exports = function () {
 		}
 	}));
 
-	
+	// autentica as rotas
 	app.use(function(req, res, next) {
-		if(!req.path.match(/^\/login$/)) {
-			basicAuth.autenticar(req, res, next);
+		if(req.path.match(/^\/login$/)) {
+			next();
 		}
 		else {
-			res.send('não precisa autenticar');
+			if(!req.cookies.token){
+				res.status(400).json("Não foi identiicado o token");
+			}
+			else{
+				basicAuth.autenticar(req, res, next);
+			}
 		}
 	});
 

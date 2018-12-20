@@ -38,7 +38,7 @@ module.exports = function(app) {
       }
       else {
         var hoje = new Date();
-        var token = hashValue(email + senha + hoje.toISOString());
+        var token = hashValue(senha + '' + hoje.getTime());
 
         LoginModel.findOrCreate({
           where: { IdCliente: cliente.Id, DataHora: { [Op.like]: dataParaPesquisa(hoje) } },
