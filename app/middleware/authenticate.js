@@ -80,7 +80,7 @@ module.exports = function(app) {
         }
       }
       else {
-        throw Error('Usuário não pode acessar esta rota!');
+        res.status(400).json('Usuário não pode acessar esta rota!');
       }
     })
     .catch((error) => {
